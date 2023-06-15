@@ -1,6 +1,5 @@
 import React from "react";
 import {Button, Input, Stack} from "@mui/joy";
-import {TasksCollection} from "../../api/TasksCollection";
 
 export const CreateTaskForm = () => {
 
@@ -10,10 +9,7 @@ export const CreateTaskForm = () => {
         // Find the text field via the React ref
         const text = event.target.text.value;
 
-        TasksCollection.insert({
-            text: text.trim(),
-            createdAt: new Date(),
-        })
+        Meteor.call("tasks.insert", text);
 
         // Clear form
         event.target.text.value = "";
